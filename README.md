@@ -31,13 +31,13 @@ The app is split in two classes. The LogReader and the parser.
 The LogReader class has three public methods and three private methods.
 
 **PUBLIC**
-1. The initializer method which takes a filepath. The initializer method calls the parse method of the Parser class. It then stores the parsed entries in the instance variable @entries. example: [ {'/help_page/1' => {:all => 4, :unique => 2}} ]
+1. The initializer method which takes a filepath. The initializer method calls the parse method of the Parser class. It then stores the parsed entries in the instance variable @entries. example: `{'/help_page/1' => {:all => 4, :unique => 2}} `
 2. The #all method that returns a list of pages with a count of entries to each page. Sorted descending. It calls the #sort_desc method and then the #format method with the instance variable @entries, the type :all and the message 'visits'.
 3. The #unique method that returns a list of pages with a count of unique entries to each page. Sorted descending. It calls the #sort_desc method and then the #format method with the instance variable @entries where the method .uniq is called on, the type :unique and the message 'unique views'.
 
 **PRIVATE**
 1. The #sort_desc method takes a hash with nested hashes and a type sorts it by the nested value linked to the given type from biggest to smallest number and returns it.
-2. The #format method takes a hash with nested hashes and a type a message and returns an array of strings with a path a count of amount of entries/unique entries and a message. example: ['/help_page/1 12 visits']
+2. The #format method takes a hash with nested hashes and a type a message and returns an array of strings with a path a count of amount of entries/unique entries and a message. example: `'/help_page/1 12 visits'`
 
 The Parser class has one public class method an three private class methods.
 
@@ -49,8 +49,8 @@ The Parser class has one public class method an three private class methods.
 2. The class method #create_entries creates an empty hash of hashes. It gives this to the #fill_hash method with the :all type. It gets the hash back and calls the #fill_hash method again for the :unique type.
 3. The class method #fill_hash takes an empty hash, a type that will become a key in the nested hash and a file from which to take the information. It then interates over the file and counts the entries or unique entries and links it to the right nested key. It only fills one type at a time and therefore is called twice in the #create_entries method.
 example: 
-[first iteration: {'/help_page/1' => {:all => 4, :unique => 0}} ]
-[second iteration: {'/help_page/1' => {:all => 4, :unique => 2}} ]
+`first iteration: {'/help_page/1' => {:all => 4, :unique => 0}} `
+`second iteration: {'/help_page/1' => {:all => 4, :unique => 2}} `
 
 
 ## Tests
