@@ -1,7 +1,8 @@
+require_relative 'parser'
+
 class LogReader
   def initialize(file_path)
-    check_file(file_path)
-    @file = parse(file_path)
+    @file = Parser.parse(file_path)
   end
 
   def all
@@ -29,13 +30,5 @@ class LogReader
     list = []
     rows.each { |key, val| list << "#{key} #{val} #{message}" }
     list
-  end
-
-  def parse(file_path)
-    File.open(file_path).map(&:strip)
-  end
-
-  def check_file(file_path)
-    raise 'File not Found' unless File.exist?(file_path)
   end
 end
