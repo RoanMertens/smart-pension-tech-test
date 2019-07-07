@@ -4,6 +4,16 @@ class LogReader
     @file = parse(file_path)
   end
 
+  def all
+    rows = Hash.new(0)
+    file = @file.map { |line| rows[line.split(' ')[0]] += 1 }
+    rows = rows.sort_by { |_k, v| v }.reverse
+    list = []
+    rows.each { |key, val| list << "#{key} #{val} visits" }
+    p list
+    list
+  end
+
   private
 
   def parse(file_path)
