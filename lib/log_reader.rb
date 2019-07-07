@@ -28,7 +28,7 @@ class LogReader
 
   def format(rows, message)
     list = []
-    rows.each { |key, val| list << "#{key} #{val} #{message}" }
+    rows.each { |k, v| list << "#{k} #{v} #{message}" }
     list
   end
 end
