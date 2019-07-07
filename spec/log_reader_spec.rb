@@ -16,4 +16,27 @@ describe LogReader do
       expect(LogReader.new('wrong path')).to raise_error
     end
   end
+  context 'when asking for an ordered list of webpages with entries' do
+    describe '#all' do
+      it 'should return an array' do
+      end
+      it 'should include the path' do
+      end
+      it 'should return an array where each item is structured this way: path, number of views, visits' do
+      end
+      it 'should return an array that is sorted by number of entries to the page (descending)' do
+      end
+    end
+
+    describe '#unique' do
+      it 'should return an array' do
+      end
+      it 'should include the path' do
+      end
+      it 'should return an array where each item is structured this way: path, number of views, unique views' do
+      end
+      it 'should return an array that is sorted by number of unique entries to the page (descending)' do
+      end
+    end
+  end
 end
