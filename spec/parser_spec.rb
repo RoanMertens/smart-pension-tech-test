@@ -7,7 +7,7 @@ describe Parser do
     end
 
     it 'should strip the \n from the strings in the array' do
-      expect(Parser.parse('./data/one_item.log').join).not_to include('\n')
+      expect(Parser.parse('./data/one_item.log')).not_to include('\n')
     end
 
     it 'should raise a "File not found" error when the location of the file is wrong' do
