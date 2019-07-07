@@ -5,20 +5,24 @@ class LogReader
   end
 
   def all
-    rows = Hash.new(0)
-    file = @file.map { |line| rows[line.split(' ')[0]] += 1 }
+    rows = count(@file)
     rows = sort_desc(rows)
     format(rows, 'visits')
   end
 
   def unique
-    rows = Hash.new(0)
-    file = @file.uniq.map { |line| rows[line.split(' ')[0]] += 1 }
+    rows = count(@file.uniq)
     rows = sort_desc(rows)
     format(rows, 'unique views')
   end
 
   private
+
+  def count(file)
+    rows = Hash.new(0)
+    file.map { |line| rows[line.split(' ')[0]] += 1 }
+    rows
+  end
 
   def sort_desc(rows)
     rows.sort_by { |_k, v| v }.reverse
