@@ -7,23 +7,27 @@ class LogReader
   def all
     rows = Hash.new(0)
     file = @file.map { |line| rows[line.split(' ')[0]] += 1 }
-    list = []
-    sort_desc(rows).each { |key, val| list << "#{key} #{val} visits" }
-    list
+    rows = sort_desc(rows)
+    format(rows, 'visits')
   end
 
   def unique
     rows = Hash.new(0)
     file = @file.uniq.map { |line| rows[line.split(' ')[0]] += 1 }
-    list = []
-    sort_desc(rows).each { |key, val| list << "#{key} #{val} unique views" }
-    list
+    rows = sort_desc(rows)
+    format(rows, 'unique views')
   end
 
   private
 
   def sort_desc(rows)
     rows.sort_by { |_k, v| v }.reverse
+  end
+
+  def format(rows, message)
+    list = []
+    rows.each { |key, val| list << "#{key} #{val} #{message}" }
+    list
   end
 
   def parse(file_path)
