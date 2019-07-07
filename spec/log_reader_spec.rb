@@ -47,13 +47,12 @@ describe LogReader do
         expect(one_item.unique[0]).to include('/help_page/1')
       end
       it 'should return an array where each item is structured this way: path, number of views, unique views' do
-        expect(one_item.unique[0]).to eql('/help_page/1 1 visits')
+        expect(one_item.unique[0]).to eql('/help_page/1 1 unique views')
       end
       it 'should return an array that is sorted by number of unique entries to the page (descending)' do
         ten_items_parsed_and_sorted = ['/about/2 3 unique views',
-                                       '/help_page/1 3 unique views',
-                                       '/home 1 unique views',
-                                       '/contact 1 unique views']
+                                       '/help_page/1 2 unique views',
+                                       '/home 1 unique views']
         expect(ten_items.unique).to eql(ten_items_parsed_and_sorted)
       end
     end
