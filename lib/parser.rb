@@ -19,4 +19,6 @@ class Parser
     file.each { |line| entries[line.split(' ')[0]][type] += 1 }
     entries
   end
+
+  private_class_method :check_file, :create_entries, :fill_hash
 end
