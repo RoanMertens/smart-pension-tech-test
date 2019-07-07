@@ -23,7 +23,7 @@ describe LogReader do
   context 'when asking for an ordered list of webpages with entries' do
     describe '#all' do
       it 'should return an array' do
-        expect(webserver.all).to be_an_instance_of(array)
+        expect(webserver.all).to be_an_instance_of(Array)
       end
       it 'should include the path' do
       end
@@ -35,7 +35,7 @@ describe LogReader do
 
     describe '#unique' do
       it 'should return an array' do
-        expect(webserver.unique).to be_an_instance_of(array)
+        expect(webserver.unique).to be_an_instance_of(Array)
       end
       it 'should include the path' do
       end
