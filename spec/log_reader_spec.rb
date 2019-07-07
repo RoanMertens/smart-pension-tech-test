@@ -10,10 +10,6 @@ describe LogReader do
       expect(LogReader).to receive(:new).with(instance_of(String))
       LogReader.new('./data/webserver.log')
     end
-
-    it 'should raise a "File not Found" exception when the location of the file is wrong or missing' do
-      expect { LogReader.new('nothing.rb') }.to raise_error('File not Found')
-    end
   end
 
   context 'when asking for an ordered list of webpages with entries' do
