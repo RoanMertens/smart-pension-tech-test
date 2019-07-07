@@ -7,17 +7,17 @@ require_relative '../lib/log_reader'
 # same buth with unique entries
 
 describe LogReader do
-  webserver = LogReader.new('../data/webserver.log')
-  one_item = LogReader.new('../data/one_item.log')
-  ten_items = LogReader.new('../data/ten_items.log')
+  webserver = LogReader.new('./data/webserver.log')
+  one_item = LogReader.new('./data/one_item.log')
+  ten_items = LogReader.new('./data/ten_items.log')
 
   context 'when initializing a new LogReader instance' do
     it 'should be initialized with the path to the .log file' do
       expect(LogReader).to receive(:new).with(instance_of(String))
       LogReader.new('../data/webserver.log')
     end
-    it 'should raise an exception when the location of the file is wrong' do
-      expect(LogReader.new('wrong path')).to raise_error('File not found')
+    it 'should raise a "File not Found" exception when the location of the file is wrong or missing' do
+      expect { LogReader.new('nothing.rb') }.to raise_error('File not Found')
     end
   end
   context 'when asking for an ordered list of webpages with entries' do
