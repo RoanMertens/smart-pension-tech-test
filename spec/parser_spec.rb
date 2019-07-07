@@ -2,12 +2,12 @@ require_relative '../lib/parser'
 
 describe Parser do
   context 'when parsing a file' do
-    it 'should accept a .log file and return an array' do
-      allow(Parser).to receive(:parse).with('./data/webserver.log').and_return(an_instance_of(Array))
+    it 'should accept a .log file and return a hash' do
+      expect(Parser.parse('./data/one_item.log')).to have_key('/help_page/1')
     end
 
-    it 'should strip the \n from the strings in the array' do
-      expect(Parser.parse('./data/one_item.log')).not_to include('\n')
+    it 'should accept a .log file and return a hash with a nested hash' do
+      expect(Parser.parse('./data/one_item.log')['/help_page/1']).to have_key(:all)
     end
 
     it 'should raise a "File not found" error when the location of the file is wrong' do
