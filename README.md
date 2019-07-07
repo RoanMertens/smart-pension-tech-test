@@ -31,22 +31,26 @@ The app is split in two classes. The LogReader and the parser.
 The LogReader class has three public methods and three private methods.
 
 **PUBLIC**
-1. The initializer method which takes a filepath. The initializer method calls the parse method of the Parser class. It then stores the parsed file in the instance variable @file.
-2. The return_all method that returns a list of pages with a count of entries to each page. Sorted descending. It calls the count method with the instance variable file and a message.
-3. The return_unique method that returns a list of pages with a count of unique entries to each page. Sorted descending. It calls the count method with the unique rows of the instance variable file and a message.
+1. The initializer method which takes a filepath. The initializer method calls the parse method of the Parser class. It then stores the parsed entries in the instance variable @entries. example: [ {'/help_page/1' => {:all => 4, :unique => 2}} ]
+2. The #all method that returns a list of pages with a count of entries to each page. Sorted descending. It calls the #sort_desc method and then the #format method with the instance variable @entries, the type :all and the message 'visits'.
+3. The #unique method that returns a list of pages with a count of unique entries to each page. Sorted descending. It calls the #sort_desc method and then the #format method with the instance variable @entries where the method .uniq is called on, the type :unique and the message 'unique views'.
 
 **PRIVATE**
-1. The count method which takes a file and a message. It uses a hash to count all duplicates that exist in the file. It calls the sort_desc and the format method. It returns the sorted and formatted array to the return_(all/unique) method.
-2. The sort_desc method takes a hash and sorts it by value from biggest to smallest number and returns it.
-3. The format method takes a hash and a message and returns a list of rows with a path a count of amount of entries/unique entries and a message.
+1. The #sort_desc method takes a hash with nested hashes and a type sorts it by the nested value linked to the given type from biggest to smallest number and returns it.
+2. The #format method takes a hash with nested hashes and a type a message and returns an array of strings with a path a count of amount of entries/unique entries and a message. example: ['/help_page/1 12 visits']
 
-The Parser class has one public an one private method.
+The Parser class has one public class method an three private class methods.
 
 **PUBLIC**
-1. The class method parse which takes a file path. It calls the check_file method. Then it parses the file and strips it. This file gets returned as an array of strings.
+1. The class method #parse which takes a file path. It calls the #check_file method. Then it opens the file and strips it.  This file is then passed to the #create_entries method. Which returns a hash of nested hashes that is returned to the LogReader instance.
 
 **PRIVATE**
-1. The class method check_file which takes a file path. It checks if the given file path points to an existing file and raises an error if it doesn't.
+1. The class method #check_file which takes a file path. It checks if the given file path points to an existing file and raises an error if it doesn't.
+2. The class method #create_entries creates an empty hash of hashes. It gives this to the #fill_hash method with the :all type. It gets the hash back and calls the #fill_hash method again for the :unique type.
+3. The class method #fill_hash takes an empty hash, a type that will become a key in the nested hash and a file from which to take the information. It then interates over the file and counts the entries or unique entries and links it to the right nested key. It only fills one type at a time and therefore is called twice in the #create_entries method.
+example: 
+[first iteration: {'/help_page/1' => {:all => 4, :unique => 0}} ]
+[second iteration: {'/help_page/1' => {:all => 4, :unique => 2}} ]
 
 
 ## Tests
@@ -62,9 +66,9 @@ The Parser class has one public an one private method.
 2. Add .log file that you want to return in the data folder.
 3. Run one of the following commands in terminal:
 
-ruby -r "./log_reader.rb" -e "p LogReader.new('filepath').return_all"
+ruby -r "./log_reader.rb" -e "p LogReader.new('filepath').all"
 
-ruby -r "./log_reader.rb" -e "p LogReader.new('filepath').return_unique"
+ruby -r "./log_reader.rb" -e "p LogReader.new('filepath').unique"
 
 example:
-ruby -r "./lib/log_reader.rb" -e "p LogReader.new('./data/webserver.log').return_unique"
+ruby -r "./lib/log_reader.rb" -e "p LogReader.new('./data/webserver.log').unique"
