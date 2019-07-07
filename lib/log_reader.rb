@@ -2,33 +2,24 @@ require_relative 'parser'
 
 class LogReader
   def initialize(file_path)
-    @file = Parser.parse(file_path)
+    @entries = Parser.parse(file_path)
   end
 
   def all
-    create_list(@file, 'visits')
+    format(sort_desc(@entries, :all), :all, 'visits')
   end
 
   def unique
-    create_list(@file.uniq, 'unique views')
+    format(sort_desc(@entries, :unique), :unique, 'unique views')
   end
 
   private
 
-  def create_list(file, message)
-    rows = Hash.new(0)
-    file.map { |line| rows[line.split(' ')[0]] += 1 }
-    rows = sort_desc(rows)
-    format(rows, message)
+  def sort_desc(entries, type)
+    entries.sort_by { |_k, v| v[type] }.reverse
   end
 
-  def sort_desc(rows)
-    rows.sort_by { |_k, v| v }.reverse
-  end
-
-  def format(rows, message)
-    list = []
-    rows.each { |key, val| list << "#{key} #{val} #{message}" }
-    list
+  def format(entries, type, message)
+    entries.map! { |k, v| "#{k} #{v[type]} #{message}" }
   end
 end
