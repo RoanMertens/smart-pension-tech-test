@@ -7,6 +7,10 @@ require_relative '../lib/log_reader'
 # same buth with unique entries
 
 describe LogReader do
+  webserver = LogReader.new('../data/webserver.log')
+  one_item = LogReader.new('../data/one_item.log')
+  ten_items = LogReader.new('../data/ten_items.log')
+
   context 'when initializing a new LogReader instance' do
     it 'should be initialized with the path to the .log file' do
       expect(LogReader).to receive(:new).with(instance_of(String))
@@ -19,6 +23,7 @@ describe LogReader do
   context 'when asking for an ordered list of webpages with entries' do
     describe '#all' do
       it 'should return an array' do
+        expect(webserver.all).to be_an_instance_of(array)
       end
       it 'should include the path' do
       end
@@ -30,6 +35,7 @@ describe LogReader do
 
     describe '#unique' do
       it 'should return an array' do
+        expect(webserver.unique).to be_an_instance_of(array)
       end
       it 'should include the path' do
       end
