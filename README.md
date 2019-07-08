@@ -56,8 +56,12 @@ example:
 ## Tests
 
 **Steps:**
-1. Bundle to get the RSpec gem.
+1. Bundle to get the RSpec gem and the SimpleCov gem.
 2. Run RSpec.
+
+
+## Code coverage
+Coverage report generated for RSpec to /smart-pension-code-test/coverage. 67 / 67 LOC (100.0%) covered.
 
 
 ## How to use?
