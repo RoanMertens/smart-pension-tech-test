@@ -2,7 +2,7 @@ require_relative 'parser'
 
 class LogReader
   def initialize(file_path)
-    @entries = Parser.parse(file_path)
+    @entries = Parser.new.parse(file_path)
   end
 
   def all
