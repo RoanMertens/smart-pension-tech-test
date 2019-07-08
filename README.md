@@ -39,16 +39,16 @@ The LogReader class has three public methods and three private methods.
 1. The #sort_desc method takes a hash with nested hashes and a type sorts it by the nested value linked to the given type from biggest to smallest number and returns it.
 2. The #format method takes a hash with nested hashes and a type a message and returns an array of strings with a path a count of amount of entries/unique entries and a message. example: `'/help_page/1 12 visits'`
 
-The Parser class has one public class method an three private class methods.
+The Parser class has one public method an three private methods.
 
 **PUBLIC**
-1. The class method #parse which takes a file path. It calls the #check_file method. Then it opens the file and strips it.  This file is then passed to the #create_entries method. Which returns a hash of nested hashes that is returned to the LogReader instance.
+1. The method #parse which takes a file path. It calls the #check_file method. Then it opens the file and strips it.  This file is then passed to the #create_entries method. Which returns a hash of nested hashes that is returned to the LogReader instance.
 
 **PRIVATE**
-1. The class method #check_file which takes a file path. It checks if the given file path points to an existing file and raises an error if it doesn't.
-2. The class method #create_entries creates an empty hash of hashes. It gives this to the #fill_hash method with the :all type. It gets the hash back and calls the #fill_hash method again for the :unique type.
-3. The class method #fill_hash takes an empty hash, a type that will become a key in the nested hash and a file from which to take the information. It then interates over the file and counts the entries or unique entries and links it to the right nested key. It only fills one type at a time and therefore is called twice in the #create_entries method.
-example: 
+1. The method #check_file which takes a file path. It checks if the given file path points to an existing file and raises an error if it doesn't.
+2. The method #create_entries creates an empty hash of hashes. It gives this to the #fill_hash method with the :all type. It gets the hash back and calls the #fill_hash method again for the :unique type.
+3. The method #fill_hash takes an empty hash, a type that will become a key in the nested hash and a file from which to take the information. It then interates over the file and counts the entries or unique entries and links it to the right nested key. It only fills one type at a time and therefore is called twice in the #create_entries method.
+example:
 `first iteration: {'/help_page/1' => {:all => 4, :unique => 0}} `
 `second iteration: {'/help_page/1' => {:all => 4, :unique => 2}} `
 
