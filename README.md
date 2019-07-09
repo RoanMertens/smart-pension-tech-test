@@ -4,9 +4,11 @@
 
 This is the Graduate Developer Test from Smart Pension. It is intended to test how I code and which methodologies I know and use.
 
+
 ## Focus
 
 The focus during the building of this project will be mostly on testing. As I don't have as much experience with TDD and testing with RSpec as I would have liked, I decided that this would be a good opportunity to learn more about the TDD approach.
+
 
 ## Approach
 
@@ -20,9 +22,18 @@ The focus during the building of this project will be mostly on testing. As I do
 8. I added tests for the Parser class and ran them.
 9. I refactored the LogReader and the Parser while testing.
 
+
+## Possible improvements
+
+* The naming of classes, methods and variables. Good naming makes it easier for those reading your code. This because it is not always clear to know how good the names are that you gave things while coding. So I'm not certain how clear the names are.
+* The tests. I feel like there are a lot of ways to improve the tests that I have written. I would like to learn more about testing and then come back to this project to see what I can improve.
+* Adding in a way to read different file types. (json, xml, etc)
+* Instead of storing the entrie and unique entrie count as a nested hash linked to the path I could have stored it as a nested array of the IP's which would look as followed: `{'/help_page/1' => ['126.318.035.038', '184.123.665.067', '444.701.448.104']}` . That would have probably made the code easier to read but I would have to test which would run faster.
+
 ## tl;dr
 
 The app consists of two classes. The LogReader that when initialized it accepts a filepath and has two instance methods to show specific sorted lists of entries and the Parser that checks if the file exists and parses it.
+
 
 ## Overview
 
